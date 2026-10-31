@@ -348,27 +348,16 @@ a {
   color: var(--color-accent-1);
 }
 
+/* Nuoli-kuva: normaalitila valkoinen primaryllä */
 .btn--primary .btn__arrow {
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1); /* accent-1 → valkoinen */
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Nuoli: varsi 24px */
-.btn--primary .btn__arrow::after {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 1.5px;
-  background: currentColor;
-  margin-right: -2px;
-  vertical-align: middle;
-}
-
-.btn--primary .btn__arrow::before {
-  content: '›';
-  font-size: 1.4em;
-  line-height: 1;
-  order: 2;
+.btn--primary:hover .btn__arrow {
+  filter: none; /* palaa accent-1-väriksi */
 }
 
 /* ── Secondary ── */
@@ -380,26 +369,9 @@ a {
 }
 
 .btn--secondary .btn__arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-}
-
-/* Pitkä nuoli: varsi + kärki */
-.btn--secondary .btn__arrow::before {
-  content: '';
-  display: inline-block;
-  width: 32px;
-  height: 1.5px;
-  background: currentColor;
-  vertical-align: middle;
-  margin-right: -1px;
-}
-
-.btn--secondary .btn__arrow::after {
-  content: '›';
-  font-size: 1.4em;
-  line-height: 1;
+  display: block;
+  flex-shrink: 0;
+  filter: none; /* pysyy accent-1:nä */
 }
 
 /* Hover: alleviivaus vasemmalta oikealle */
