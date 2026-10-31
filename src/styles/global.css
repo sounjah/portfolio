@@ -10,17 +10,31 @@
 }
 
 :root {
-  --color-bg:        #fdf6f0;
-  --color-surface:   #ffffff;
-  --color-ink:       #1a1a2e;
-  --color-ink-muted: #3d3d4f;
-  --color-accent:    #7a1535;   /* punaviini */
-  --color-tag-light: rgba(255,255,255,0.92);
-  --color-tag-dark:  #1a1a2e;
+  /* ── Värit ── */
+  --color-light:       #FFF5E9;   /* sivun tausta */
+  --color-extra-light: #FFFEF9;   /* korttien tausta */
+  --color-dark:        #0C2D24;   /* tekstit */
+  --color-accent-1:    #076AB0;   /* painikkeet, linkit */
 
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans:  'Source Sans 3', system-ui, sans-serif;
+  /* Vanhat nimet → uudet muuttujat (yhteensopivuus) */
+  --color-bg:        var(--color-light);
+  --color-surface:   var(--color-extra-light);
+  --color-ink:       var(--color-dark);
+  --color-ink-muted: var(--color-dark);
+  --color-accent:    var(--color-accent-1);
+  --color-tag-light: rgba(255, 254, 249, 0.92);
+  --color-tag-dark:  var(--color-dark);
 
+  /* ── Fontit ── */
+  --font-heading: 'Alexandria', system-ui, sans-serif;   /* Medium 500 */
+  --font-body:    'Roboto', system-ui, sans-serif;        /* Regular 400 */
+  --font-alt:     'Roboto Mono', monospace;               /* Bold 700 */
+
+  /* Vanhat nimet → uudet muuttujat (yhteensopivuus) */
+  --font-serif: var(--font-heading);
+  --font-sans:  var(--font-body);
+
+  /* ── Layout ── */
   --max-width: 1020px;
   --gutter:    clamp(1.25rem, 5vw, 3rem);
   --radius:    0.5rem;
@@ -31,9 +45,9 @@ html {
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -206,19 +220,21 @@ a {
 
 /* Body */
 .card__body {
-  padding: 1.25rem 0 0;
+  padding: 1.25rem 0.75rem 1rem;
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 0.5rem;
+  background: var(--color-extra-light);
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 
 .card__title {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.25;
-  color: var(--color-ink);
+  color: var(--color-dark);
 }
 
 .card__title-link {
@@ -257,12 +273,12 @@ a {
 }
 
 .btn--primary {
-  background: var(--color-accent);
+  background: var(--color-accent-1);
   color: #fff;
 }
 
 .btn--primary:hover {
-  background: #5e1028;
+  background: #054f84;
   transform: translateY(-1px);
 }
 
