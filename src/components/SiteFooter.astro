@@ -1,7 +1,17 @@
 ---
+import contactData from '../content/etusivu.json'
+
+const contactHeading: string = (contactData as any).contactHeading ?? 'Contact'
+const contactEmail: string = (contactData as any).contactEmail ?? 'kujansuu.sonja@gmail.com'
 const year = new Date().getFullYear()
 ---
 
 <footer class="site-footer">
-  <p>© Sonja Kujansuu {year}</p>
+  <section class="contact" id="contact" aria-labelledby="contact-heading">
+    <h2 class="contact__heading" id="contact-heading">{contactHeading}</h2>
+    <p class="contact__email">
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </p>
+  </section>
+  <p class="site-footer__copy">© Sonja Kujansuu {year}</p>
 </footer>

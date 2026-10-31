@@ -84,11 +84,12 @@ a {
 }
 
 .logo {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-ink);
-  letter-spacing: -0.01em;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-accent-1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .site-nav {
@@ -109,10 +110,10 @@ a {
 
 /* ── HERO ────────────────────────────────────────────────── */
 .hero {
-  background-color: var(--color-extra-light);
+  background-color: var(--color-light);
   max-width: calc(var(--max-width) + var(--gutter) * 2);
   margin-inline: auto;
-  padding: clamp(3rem, 6vw, 5rem) var(--gutter);
+  padding: 2.5rem var(--gutter);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 5vw, 4rem);
@@ -147,6 +148,21 @@ a {
   font-size: 1rem;
   color: var(--color-dark);
   line-height: 1.65;
+}
+
+.hero__arrow {
+  display: inline-block;
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  line-height: 1;
+  margin-top: 0.5rem;
+  transition: transform 0.25s;
+  align-self: flex-start;
+}
+
+.hero__arrow:hover {
+  transform: translateY(4px);
+  color: var(--color-accent-1);
 }
 
 .hero__image-wrap {
@@ -306,10 +322,42 @@ a {
 /* ── FOOTER ──────────────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid rgba(0,0,0,0.08);
-  padding: 1.5rem var(--gutter);
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.contact {
+  max-width: calc(var(--max-width) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: clamp(3rem, 6vw, 4rem) var(--gutter) clamp(2rem, 4vw, 3rem);
+}
+
+.contact__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 500;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+}
+
+.contact__email a {
+  font-size: 1.0625rem;
+  color: var(--color-accent-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact__email a:hover {
+  color: var(--color-dark);
+}
+
+.site-footer__copy {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 1.25rem var(--gutter);
   text-align: center;
   font-size: 0.875rem;
-  color: var(--color-ink-muted);
+  color: var(--color-dark);
+  max-width: calc(var(--max-width) + var(--gutter) * 2);
+  margin-inline: auto;
 }
 
 /* ── BREADCRUMB ──────────────────────────────────────────── */

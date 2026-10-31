@@ -59,6 +59,14 @@ export default config({
             itemLabel: (props) => props.value.slice(0, 60) + (props.value.length > 60 ? '…' : ''),
           },
         ),
+        contactHeading: fields.text({
+          label: 'Contact-otsikko',
+          defaultValue: 'Contact',
+        }),
+        contactEmail: fields.text({
+          label: 'Sähköpostiosoite',
+          defaultValue: 'kujansuu.sonja@gmail.com',
+        }),
         metaTitle: fields.text({
           label: 'Sivun otsikko (meta)',
           defaultValue: 'Sonja Kujansuu – Portfolio',
