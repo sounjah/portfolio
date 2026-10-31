@@ -10,7 +10,11 @@ const isProduction = process.env.NODE_ENV === 'production'
 export default defineConfig({
   output: 'server',
   adapter: isProduction
-    ? cloudflare({ mode: 'directory' })
+    ? cloudflare({
+        mode: 'directory',
+        imageService: 'passthrough',
+        sessionKVBindingName: undefined,
+      })
     : node({ mode: 'standalone' }),
   integrations: [react(), markdoc(), keystatic()],
 
