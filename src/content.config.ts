@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content'
 import { glob } from 'astro/loaders'
 
+// ── Projektikokoelma ──────────────────────────────────────────────────
 const projektit = defineCollection({
   loader: glob({ pattern: '**/*.mdoc', base: './src/content/projektit' }),
   schema: z.object({
@@ -12,5 +13,8 @@ const projektit = defineCollection({
     projectUrl: z.string().url().optional(),
   }),
 })
+
+// Etusivun data luetaan suoraan Keystatic Reader API:lla (src/pages/index.astro)
+// eikä Astro content collections -järjestelmän kautta.
 
 export const collections = { projektit }

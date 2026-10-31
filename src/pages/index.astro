@@ -6,39 +6,46 @@ import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
 import { getCollection } from 'astro:content'
 
+// Luetaan etusivun CMS-data suoralla JSON-importilla (Vite bundlaa build-aikana).
+// Tämä toimii Cloudflare Workers -ympäristössä toisin kuin @keystatic/core/reader,
+// joka vaatii node:fs-moduulin. Keystatic kirjoittaa tiedostoon src/content/etusivu.json.
+import etusivuData from '../content/etusivu.json'
+
 const projektit = await getCollection('projektit')
+
+const heroImage: string | undefined = etusivuData.heroImage ?? undefined
+const heroImageAlt: string = etusivuData.heroImageAlt ?? 'Hero-kuva'
+const introHeading: string = etusivuData.introHeading ?? 'Heippa! Tervetuloa Sonjan portfolioon.'
+const introBody: string[] = etusivuData.introBody ?? []
+const metaTitle: string = etusivuData.metaTitle ?? 'Sonja Kujansuu – Portfolio'
+const metaDescription: string = etusivuData.metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
+
+// Hero-kuva: käytetään CMS:stä ladattua tai oletusta
+const heroSrc = heroImage
+  ?? 'https://images.unsplash.com/photo-1527199372136-dff50c10ea34?w=1400&q=80&auto=format&fit=crop'
 ---
 
-<BaseLayout>
+<BaseLayout title={metaTitle} description={metaDescription}>
   <SiteHeader />
 
   <main>
     <!-- ── HERO ─────────────────────────────────────────── -->
     <section class="hero" aria-label="Herokuva">
       <img
-        src="https://images.unsplash.com/photo-1527199372136-dff50c10ea34?w=1400&q=80&auto=format&fit=crop"
-        alt="Keltaisia takseja kaupunkimaisemassa"
+        src={heroSrc}
+        alt={heroImageAlt}
         class="hero__img"
       />
     </section>
 
     <!-- ── INTRO ─────────────────────────────────────────── -->
     <section class="intro" id="about">
-      <h1 class="intro__heading">Heippa! Tervetuloa Sonjan portfolioon.</h1>
+      <h1 class="intro__heading">{introHeading}</h1>
 
       <div class="intro__body">
-        <p>
-          Olen käyttöliittymäsuunnittelun ja käyttökokemuksen asiantuntija, jolla on palo
-          saavutettaviin ja käyttäjälähtöisiin palveluihin. Konseptoin, muotoilen ja
-          jatkokehitän verkkopalveluita, jotka toimivat intuitiivisesti, tuovat aitoa
-          lisäarvoa käyttäjälleen ja kaiken lisäksi näyttävät hyvältä.
-        </p>
-        <p>
-          Syvennän osaamistani palvelumuotoilun parissa, ja luontainen taipumukseni
-          asiakaskokemuksen kehittämiseen näkyy työtotteessani.
-        </p>
-        <p>Portfolion vanhimmat työt kertovat juuristani painotuotteiden parissa.</p>
-        <p>Selaa ja tutustu työnäytteisiini tarkemmin.</p>
+        {introBody?.map((kappale: string) => (
+          <p>{kappale}</p>
+        ))}
       </div>
 
       <a href="#tyot" class="intro__arrow" aria-label="Siirry töihin">↓</a>

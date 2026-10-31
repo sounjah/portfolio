@@ -9,6 +9,12 @@ node_modules/
 .env
 .env.local
 
+# Astro generated
+.astro/
+
+# Wrangler / Cloudflare
+.wrangler/
+
 # Logs
 nohup.out
 

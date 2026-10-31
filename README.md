@@ -60,15 +60,56 @@ Paikallisessa kehityksessä: http://localhost:4321/keystatic
 | `projectUrl` | Linkki toteutettuun palveluun (valinnainen) |
 | `body` | Pitkä sisältö Markdoc-muodossa |
 
-## GitHub-moodiin siirtyminen
+## Keystatic GitHub-kirjautumisen käyttöönotto
 
-1. Päivitä `keystatic.config.ts`:
-   ```ts
-   storage: {
-     kind: 'github',
-     repo: { owner: 'sinun-käyttäjänimi', name: 'portfolio-sonja' }
-   }
-   ```
-2. Käynnistä `npm run dev` ja siirry `/keystatic`
-3. Klikkaa "Login with GitHub" – luo GitHub App automaattisesti
-4. Kopioi luodut env-muuttujat `.env`-tiedostoon (`.env.example` mallina)
+Keystatic käyttää GitHub App -pohjaista OAuth-kirjautumista. GitHub App täytyy luoda
+**kerran paikallisesti** ennen kuin Cloudflare Pages -deployment toimii.
+
+### Vaihe 1 – Luo GitHub App paikallisesti
+
+```bash
+npm run dev
+# Avaa http://localhost:4321/keystatic
+```
+
+Klikkaa **"Login with GitHub"** ja seuraa ohjeet GitHub App:n luomiseen.
+Keystatic kirjoittaa automaattisesti `.env`-tiedostoon:
+
+```
+KEYSTATIC_GITHUB_CLIENT_ID=Iv1.xxxxxxxxxxxx
+KEYSTATIC_GITHUB_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+KEYSTATIC_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=portfolio-sonja-cms
+```
+
+### Vaihe 2 – Lisää credentials Cloudflare Pagesiin
+
+Cloudflare Dashboard → Workers & Pages → `portfolio-sonja` →
+**Settings → Environment variables → Production**
+
+Lisää nämä muuttujat **Encrypt**-tyyppisinä:
+
+| Muuttuja | Arvo |
+|---|---|
+| `KEYSTATIC_GITHUB_CLIENT_ID` | `.env`-tiedostosta |
+| `KEYSTATIC_GITHUB_CLIENT_SECRET` | `.env`-tiedostosta |
+| `KEYSTATIC_SECRET` | `.env`-tiedostosta |
+| `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | `.env`-tiedostosta |
+
+### Vaihe 3 – Lisää callback-URL GitHub App:iin
+
+GitHub App:lla täytyy olla tuotantodomainisi callback-URL:
+
+1. Mene https://github.com/settings/apps → valitse luotu app
+2. **"Callback URL"** -kohtaan lisää:\
+   `https://portfolio-sonja.kujansuu-sonja.workers.dev/api/keystatic/github/oauth/callback`
+3. Tallenna
+
+### Vaihe 4 – Deploy uudelleen
+
+```bash
+git add -A && git commit -m "feat: Keystatic env schema" && git push
+```
+
+Cloudflare Pages ajaa buildin automaattisesti. Sen jälkeen
+https://portfolio-sonja.kujansuu-sonja.workers.dev/keystatic toimii.

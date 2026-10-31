@@ -1,14 +1,72 @@
-import { config, fields, collection } from '@keystatic/core'
+import { config, fields, collection, singleton } from '@keystatic/core'
 
 export default config({
   storage: {
     kind: 'github',
     repo: {
-      owner: 'GITHUB_OWNER',
-      name: 'GITHUB_REPO',
+      owner: 'sounjah',
+      name: 'portfolio',
     },
   },
 
+  ui: {
+    brand: {
+      name: 'Sonja Kujansuu – Portfolio',
+    },
+    navigation: {
+      Etusivu: ['etusivu'],
+      Sisältö: ['projektit'],
+    },
+  },
+
+  // ── SINGLETON: Etusivun sisältö ──────────────────────────────────────
+  singletons: {
+    etusivu: singleton({
+      label: 'Etusivu',
+      path: 'src/content/etusivu',
+      format: { data: 'json' },
+      schema: {
+        heroImage: fields.image({
+          label: 'Hero-kuva',
+          description: 'Etusivun suuri taustakuva',
+          directory: 'public/images',
+          publicPath: '/images/',
+          validation: { isRequired: false },
+        }),
+        heroImageAlt: fields.text({
+          label: 'Hero-kuvan alt-teksti',
+          description: 'Kuvaileva teksti saavutettavuutta varten',
+          defaultValue: 'Hero-kuva',
+        }),
+        introHeading: fields.text({
+          label: 'Intro-otsikko',
+          defaultValue: 'Heippa! Tervetuloa Sonjan portfolioon.',
+        }),
+        introBody: fields.array(
+          fields.text({
+            label: 'Kappale',
+            multiline: true,
+          }),
+          {
+            label: 'Intro-tekstikappaleet',
+            description: 'Jokainen rivi on oma kappaleensa',
+            itemLabel: (props) => props.value.slice(0, 60) + (props.value.length > 60 ? '…' : ''),
+          },
+        ),
+        metaTitle: fields.text({
+          label: 'Sivun otsikko (meta)',
+          defaultValue: 'Sonja Kujansuu – Portfolio',
+        }),
+        metaDescription: fields.text({
+          label: 'Sivun kuvaus (meta)',
+          defaultValue: 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio',
+          multiline: true,
+        }),
+      },
+    }),
+  },
+
+  // ── COLLECTION: Projektit ────────────────────────────────────────────
   collections: {
     projektit: collection({
       label: 'Projektit',

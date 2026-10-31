@@ -1,3 +1,21 @@
 name = "portfolio"
 compatibility_date = "2025-01-01"
 pages_build_output_dir = "./dist"
+
+# nodejs_compat tarvitaan Keystatic API-reittejä varten (crypto, fs, path).
+# Keystatic-hallintapaneeli (/keystatic) käyttää näitä Node.js-moduuleja.
+compatibility_flags = ["nodejs_compat"]
+
+# ── Keystatic CMS – ympäristömuuttujat ───────────────────────────────
+# Lisää nämä myös Cloudflare Pages -projektin asetuksiin:
+# Settings → Environment variables → Production (ja Preview)
+#
+# [vars]
+# GITHUB_REPO_OWNER = "sonjakujansuu"
+# GITHUB_REPO_NAME = "portfolio-sonja"
+#
+# Salaiset muuttujat (ÄLÄ lisää tänne, lisää Cloudflare-hallintapaneeliin):
+# KEYSTATIC_GITHUB_CLIENT_ID
+# KEYSTATIC_GITHUB_CLIENT_SECRET
+# KEYSTATIC_SECRET
+# PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
