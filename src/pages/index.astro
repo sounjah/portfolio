@@ -13,16 +13,15 @@ import etusivuData from '../content/etusivu.json'
 
 const projektit = await getCollection('projektit')
 
-const heroImage: string | undefined = etusivuData.heroImage ?? undefined
-const heroImageAlt: string = etusivuData.heroImageAlt ?? 'Hero-kuva'
-const introHeading: string = etusivuData.introHeading ?? 'Heippa! Tervetuloa Sonjan portfolioon.'
-const introBody: string[] = etusivuData.introBody ?? []
-const metaTitle: string = etusivuData.metaTitle ?? 'Sonja Kujansuu – Portfolio'
-const metaDescription: string = etusivuData.metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
+const heroImage: string | undefined = (etusivuData as any).heroImage ?? undefined
+const heroImageAlt: string = (etusivuData as any).heroImageAlt ?? 'Sonja Kujansuu'
+const introHeading: string = (etusivuData as any).introHeading ?? 'Welcome to my portfolio!'
+const introSubheading: string = (etusivuData as any).introSubheading ?? ''
+const introBody: string[] = (etusivuData as any).introBody ?? []
+const metaTitle: string = (etusivuData as any).metaTitle ?? 'Sonja Kujansuu – Portfolio'
+const metaDescription: string = (etusivuData as any).metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
 
-// Hero-kuva: käytetään CMS:stä ladattua tai oletusta
-const heroSrc = heroImage
-  ?? 'https://images.unsplash.com/photo-1527199372136-dff50c10ea34?w=1400&q=80&auto=format&fit=crop'
+const heroSrc = heroImage ?? '/images/heroImage.jpeg'
 ---
 
 <BaseLayout title={metaTitle} description={metaDescription}>
@@ -30,25 +29,25 @@ const heroSrc = heroImage
 
   <main>
     <!-- ── HERO ─────────────────────────────────────────── -->
-    <section class="hero" aria-label="Herokuva">
-      <img
-        src={heroSrc}
-        alt={heroImageAlt}
-        class="hero__img"
-      />
-    </section>
-
-    <!-- ── INTRO ─────────────────────────────────────────── -->
-    <section class="intro" id="about">
-      <h1 class="intro__heading">{introHeading}</h1>
-
-      <div class="intro__body">
-        {introBody?.map((kappale: string) => (
-          <p>{kappale}</p>
-        ))}
+    <section class="hero" id="about" aria-label="Esittely">
+      <div class="hero__content">
+        <h1 class="hero__heading">{introHeading}</h1>
+        {introSubheading && (
+          <p class="hero__subheading">{introSubheading}</p>
+        )}
+        <div class="hero__body">
+          {introBody?.map((kappale: string) => (
+            <p>{kappale}</p>
+          ))}
+        </div>
       </div>
-
-      <a href="#tyot" class="intro__arrow" aria-label="Siirry töihin">↓</a>
+      <div class="hero__image-wrap">
+        <img
+          src={heroSrc}
+          alt={heroImageAlt}
+          class="hero__img"
+        />
+      </div>
     </section>
 
     <!-- ── NOSTOKORTTIEN GRID ─────────────────────────────── -->

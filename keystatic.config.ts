@@ -40,7 +40,13 @@ export default config({
         }),
         introHeading: fields.text({
           label: 'Intro-otsikko',
-          defaultValue: 'Heippa! Tervetuloa Sonjan portfolioon.',
+          defaultValue: 'Welcome to my portfolio!',
+        }),
+        introSubheading: fields.text({
+          label: 'Intro-alaotsikko',
+          description: 'Esim. "UI/UX Designer & Design Systems Specialist"',
+          defaultValue: '',
+          validation: { isRequired: false },
         }),
         introBody: fields.array(
           fields.text({
