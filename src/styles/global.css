@@ -237,9 +237,10 @@ a {
   bottom: 0.75rem;
   right: 0.75rem;
   padding: 0.3rem 0.85rem;
-  border-radius: 999px;
+  border-radius: 4px;
+  font-family: var(--font-alt);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   background: var(--color-tag-light);
   color: var(--color-ink);
   backdrop-filter: blur(4px);
