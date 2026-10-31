@@ -1,0 +1,12 @@
+---
+const currentPath = Astro.url.pathname
+---
+
+<header class="site-header">
+  <a href="/" class="logo">Sonja Kujansuu</a>
+  <nav class="site-nav">
+    <a href="/#tyot" class:list={[{ active: currentPath === '/' }]}>Työt</a>
+    <a href="/#about">Minusta</a>
+    <a href="mailto:sonja@example.com">Ota yhteyttä</a>
+  </nav>
+</header>

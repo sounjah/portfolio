@@ -1,0 +1,16 @@
+# Build output
+dist/
+.output/
+
+# Dependencies
+node_modules/
+
+# Env
+.env
+.env.local
+
+# Logs
+nohup.out
+
+# Editor
+.DS_Store

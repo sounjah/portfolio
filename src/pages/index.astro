@@ -1,0 +1,90 @@
+---
+export const prerender = true
+
+import BaseLayout from '../layouts/BaseLayout.astro'
+import SiteHeader from '../components/SiteHeader.astro'
+import SiteFooter from '../components/SiteFooter.astro'
+import { getCollection } from 'astro:content'
+
+const projektit = await getCollection('projektit')
+---
+
+<BaseLayout>
+  <SiteHeader />
+
+  <main>
+    <!-- ── HERO ─────────────────────────────────────────── -->
+    <section class="hero" aria-label="Herokuva">
+      <img
+        src="https://images.unsplash.com/photo-1527199372136-dff50c10ea34?w=1400&q=80&auto=format&fit=crop"
+        alt="Keltaisia takseja kaupunkimaisemassa"
+        class="hero__img"
+      />
+    </section>
+
+    <!-- ── INTRO ─────────────────────────────────────────── -->
+    <section class="intro" id="about">
+      <h1 class="intro__heading">Heippa! Tervetuloa Sonjan portfolioon.</h1>
+
+      <div class="intro__body">
+        <p>
+          Olen käyttöliittymäsuunnittelun ja käyttökokemuksen asiantuntija, jolla on palo
+          saavutettaviin ja käyttäjälähtöisiin palveluihin. Konseptoin, muotoilen ja
+          jatkokehitän verkkopalveluita, jotka toimivat intuitiivisesti, tuovat aitoa
+          lisäarvoa käyttäjälleen ja kaiken lisäksi näyttävät hyvältä.
+        </p>
+        <p>
+          Syvennän osaamistani palvelumuotoilun parissa, ja luontainen taipumukseni
+          asiakaskokemuksen kehittämiseen näkyy työtotteessani.
+        </p>
+        <p>Portfolion vanhimmat työt kertovat juuristani painotuotteiden parissa.</p>
+        <p>Selaa ja tutustu työnäytteisiini tarkemmin.</p>
+      </div>
+
+      <a href="#tyot" class="intro__arrow" aria-label="Siirry töihin">↓</a>
+    </section>
+
+    <!-- ── NOSTOKORTTIEN GRID ─────────────────────────────── -->
+    <section class="works" id="tyot" aria-labelledby="works-heading">
+      <h2 class="sr-only" id="works-heading">Työt</h2>
+
+      <div class="works__grid">
+        {projektit.map((projekti) => {
+          const coverSrc = projekti.data.coverImage
+            ?? `https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=700&q=80&auto=format&fit=crop`
+          const tagDark = projekti.data.tag !== 'Jatkuva kehitys'
+
+          return (
+            <article class="card">
+              <a href={`/tyot/${projekti.id}`} class="card__link" tabindex="-1" aria-hidden="true">
+                <div class="card__img-wrap">
+                  <img
+                    src={coverSrc}
+                    alt={projekti.data.title}
+                    class="card__img"
+                  />
+                  <span class:list={['card__tag', { 'card__tag--dark': tagDark }]}>
+                    {projekti.data.tag}
+                  </span>
+                </div>
+              </a>
+              <div class="card__body">
+                <h3 class="card__title">
+                  <a href={`/tyot/${projekti.id}`} class="card__title-link">
+                    {projekti.data.title}
+                  </a>
+                </h3>
+                <p class="card__desc">{projekti.data.ingress}</p>
+                <a href={`/tyot/${projekti.id}`} class="btn btn--primary">
+                  Lue lisää <span class="btn__arrow">→</span>
+                </a>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

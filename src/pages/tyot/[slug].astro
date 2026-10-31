@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import SiteHeader from '../../components/SiteHeader.astro'
+import SiteFooter from '../../components/SiteFooter.astro'
+import { getCollection, render } from 'astro:content'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const projektit = await getCollection('projektit')
+  return projektit.map((p) => ({
+    params: { slug: p.id },
+    props: { projekti: p },
+  }))
+}
+
+const { projekti } = Astro.props
+const { Content } = await render(projekti)
+const { title, year, tag, ingress, coverImage, projectUrl } = projekti.data
+
+const coverSrc = coverImage
+  ?? 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80&auto=format&fit=crop'
+
+// Näytetään URL ilman https://
+const displayUrl = projectUrl
+  ? projectUrl.replace(/^https?:\/\//, '')
+  : null
+---
+
+<BaseLayout title={`${title} – Sonja Kujansuu`} description={ingress}>
+  <SiteHeader />
+
+  <nav class="breadcrumb" aria-label="Navigaatio">
+    <a href="/" class="breadcrumb__link">
+      <span class="breadcrumb__arrow">←</span>
+      Etusivu
+    </a>
+  </nav>
+
+  <main>
+    <article class="project">
+      <div class="project__grid">
+
+        <!-- ── VASEN: kuva + URL ──────────────────────────── -->
+        <div class="project__media">
+          <img
+            src={coverSrc}
+            alt={title}
+            class="project__cover"
+          />
+          {displayUrl && (
+            <a
+              href={projectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project__url-link"
+            >
+              {displayUrl}
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+
+        <!-- ── OIKEA: teksti ──────────────────────────────── -->
+        <div class="project__content">
+          <h1 class="project__title">{title}</h1>
+          <p class="project__year">{year}</p>
+
+          <p class="project__ingress">{ingress}</p>
+
+          <div class="project__body">
+            <Content />
+          </div>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
