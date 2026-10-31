@@ -9,6 +9,7 @@ const projektit = defineCollection({
     year: z.string(),
     tag: z.string(),
     ingress: z.string(),
+    keywords: z.array(z.string()).optional(),
     coverImage: z.string().optional(),
     projectUrl: z.string().url().optional(),
   }),

@@ -106,6 +106,14 @@ export default config({
           ],
           defaultValue: 'Projekti',
         }),
+        keywords: fields.array(
+          fields.text({ label: 'Avainsana' }),
+          {
+            label: 'Avainsanat',
+            description: 'Näkyvät projektin sivulla täginä kuvan alla',
+            itemLabel: (props) => props.value,
+          },
+        ),
         ingress: fields.text({
           label: 'Ingressi',
           description: 'Lyhyt kuvaus projektin etusivukorttiin ja projektin alkuun',

@@ -412,6 +412,27 @@ a {
   object-fit: cover;
 }
 
+/* Keywords */
+.project__keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project__keyword {
+  background: var(--color-dark);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
 .project__url-link {
   display: inline-flex;
   align-items: center;
