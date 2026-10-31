@@ -83,7 +83,8 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
                 </h3>
                 <p class="card__desc">{projekti.data.ingress}</p>
                 <a href={`/tyot/${projekti.id}`} class="btn btn--primary">
-                  Lue lisää <span class="btn__arrow">→</span>
+                  <span class="btn__text">Lue lisää</span>
+                  <span class="btn__arrow" aria-hidden="true"></span>
                 </a>
               </div>
             </article>
