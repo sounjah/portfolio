@@ -1,11 +1,9 @@
 {
-  "heroImageAlt": "Keltaisia takseja kaupunkimaisemassa",
-  "introHeading": "Heippa! Tervetuloa Sonjan portfolioon.",
+  "heroImage": "/images/heroImage.jpeg",
+  "heroImageAlt": "Hero-kuva",
+  "introHeading": "Welcome to my portfolio",
   "introBody": [
-    "Olen käyttöliittymäsuunnittelun ja käyttökokemuksen asiantuntija, jolla on palo saavutettaviin ja käyttäjälähtöisiin palveluihin. Konseptoin, muotoilen ja jatkokehitän verkkopalveluita, jotka toimivat intuitiivisesti, tuovat aitoa lisäarvoa käyttäjälleen ja kaiken lisäksi näyttävät hyvältä.",
-    "Syvennän osaamistani palvelumuotoilun parissa, ja luontainen taipumukseni asiakaskokemuksen kehittämiseen näkyy työtotteessani.",
-    "Portfolion vanhimmat työt kertovat juuristani painotuotteiden parissa.",
-    "Selaa ja tutustu työnäytteisiini tarkemmin."
+    "Missä tämä näkyy"
   ],
   "metaTitle": "Sonja Kujansuu – Portfolio",
   "metaDescription": "Sonja Kujansuun UX- ja palvelumuotoilun portfolio"
