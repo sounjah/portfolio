@@ -12,6 +12,8 @@ const projektit = defineCollection({
     keywords: z.array(z.string()).optional(),
     coverImage: z.string().optional(),
     projectUrl: z.string().url().optional(),
+    projectUrlLabel: z.string().optional(),
+    cardOnly: z.boolean().optional(),
   }),
 })
 

@@ -129,6 +129,17 @@ export default config({
           description: 'Linkki toteutettuun palveluun (valinnainen)',
           validation: { isRequired: false },
         }),
+        projectUrlLabel: fields.text({
+          label: 'Painikkeen teksti',
+          description: 'Teksti projektin URL-painikkeessa, esim. "Katso sivusto"',
+          defaultValue: 'Katso sivusto',
+          validation: { isRequired: false },
+        }),
+        cardOnly: fields.checkbox({
+          label: 'Vain nostokortti',
+          description: 'Ruksaa tämä jos projektilla ei ole omaa alasivua. Näkyy vain etusivun kortissa ilman painiketta.',
+          defaultValue: false,
+        }),
         body: fields.markdoc({
           label: 'Sisältö',
         }),

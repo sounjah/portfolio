@@ -60,10 +60,11 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
           const coverSrc = projekti.data.coverImage
             ?? `https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=700&q=80&auto=format&fit=crop`
           const tagDark = projekti.data.tag !== 'Jatkuva kehitys'
+          const cardOnly = projekti.data.cardOnly ?? false
 
           return (
             <article class="card">
-              <a href={`/tyot/${projekti.id}`} class="card__link" tabindex="-1" aria-hidden="true">
+              {cardOnly ? (
                 <div class="card__img-wrap">
                   <img
                     src={coverSrc}
@@ -74,18 +75,37 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
                     {projekti.data.tag}
                   </span>
                 </div>
-              </a>
+              ) : (
+                <a href={`/tyot/${projekti.id}`} class="card__link" tabindex="-1" aria-hidden="true">
+                  <div class="card__img-wrap">
+                    <img
+                      src={coverSrc}
+                      alt={projekti.data.title}
+                      class="card__img"
+                    />
+                    <span class:list={['card__tag', { 'card__tag--dark': tagDark }]}>
+                      {projekti.data.tag}
+                    </span>
+                  </div>
+                </a>
+              )}
               <div class="card__body">
                 <h3 class="card__title">
-                  <a href={`/tyot/${projekti.id}`} class="card__title-link">
-                    {projekti.data.title}
-                  </a>
+                  {cardOnly ? (
+                    projekti.data.title
+                  ) : (
+                    <a href={`/tyot/${projekti.id}`} class="card__title-link">
+                      {projekti.data.title}
+                    </a>
+                  )}
                 </h3>
                 <p class="card__desc">{projekti.data.ingress}</p>
-                <a href={`/tyot/${projekti.id}`} class="btn btn--primary">
-                  <span class="btn__text">Lue lisää</span>
-                  <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
-                </a>
+                {!cardOnly && (
+                  <a href={`/tyot/${projekti.id}`} class="btn btn--primary">
+                    <span class="btn__text">Lue lisää</span>
+                    <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
+                  </a>
+                )}
               </div>
             </article>
           )

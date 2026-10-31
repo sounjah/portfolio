@@ -8,23 +8,22 @@ export const prerender = true
 
 export async function getStaticPaths() {
   const projektit = await getCollection('projektit')
-  return projektit.map((p) => ({
-    params: { slug: p.id },
-    props: { projekti: p },
-  }))
+  return projektit
+    .filter((p) => !p.data.cardOnly)
+    .map((p) => ({
+      params: { slug: p.id },
+      props: { projekti: p },
+    }))
 }
 
 const { projekti } = Astro.props
 const { Content } = await render(projekti)
-const { title, year, tag, ingress, keywords, coverImage, projectUrl } = projekti.data
+const { title, year, tag, ingress, keywords, coverImage, projectUrl, projectUrlLabel } = projekti.data
 
 const coverSrc = coverImage
   ?? 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80&auto=format&fit=crop'
 
-// Näytetään URL ilman https://
-const displayUrl = projectUrl
-  ? projectUrl.replace(/^https?:\/\//, '')
-  : null
+const urlLabel = projectUrlLabel || 'Katso sivusto'
 ---
 
 <BaseLayout title={`${title} – Sonja Kujansuu`} description={ingress}>
@@ -55,14 +54,14 @@ const displayUrl = projectUrl
               ))}
             </ul>
           )}
-          {displayUrl && (
+          {projectUrl && (
             <a
               href={projectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn--secondary"
+              class="btn btn--primary"
             >
-              <span class="btn__text">{displayUrl}</span>
+              <span class="btn__text">{urlLabel}</span>
               <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
             </a>
           )}
