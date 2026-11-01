@@ -11,6 +11,10 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 binding = "STATIC_ASSETS"
 
+[observability.logs]
+enabled = true
+invocation_logs = true
+
 # ── Keystatic CMS – ympäristömuuttujat ───────────────────────────────
 # Lisää nämä myös Cloudflare Pages -projektin asetuksiin:
 # Settings → Environment variables → Production (ja Preview)
