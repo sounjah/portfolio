@@ -5,10 +5,6 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
 import { getCollection } from 'astro:content'
-
-// Luetaan etusivun CMS-data suoralla JSON-importilla (Vite bundlaa build-aikana).
-// Tämä toimii Cloudflare Workers -ympäristössä toisin kuin @keystatic/core/reader,
-// joka vaatii node:fs-moduulin. Keystatic kirjoittaa tiedostoon src/content/etusivu.json.
 import etusivuData from '../content/etusivu.json'
 
 const projektitRaw = await getCollection('projektit')
@@ -20,11 +16,15 @@ const jarjestetyt = jarjestys
 const loput = projektitRaw.filter(p => !jarjestys.includes(p.id))
 const projektit = [...jarjestetyt, ...loput].filter(p => !p.data.hidden)
 
+// Ladataan etusivu.mdoc build-aikana import.meta.glob:lla
+const mdocFiles = import.meta.glob('../content/etusivu.mdoc', { eager: true })
+const etusivuMdoc = mdocFiles['../content/etusivu.mdoc'] as any
+const IntroBodyContent = etusivuMdoc?.Content ?? null
+
 const heroImage: string | undefined = (etusivuData as any).heroImage ?? undefined
 const heroImageAlt: string = (etusivuData as any).heroImageAlt ?? 'Sonja Kujansuu'
 const introHeading: string = (etusivuData as any).introHeading ?? 'Welcome to my portfolio!'
 const introSubheading: string = (etusivuData as any).introSubheading ?? ''
-const introBody: string[] = (etusivuData as any).introBody ?? []
 const metaTitle: string = (etusivuData as any).metaTitle ?? 'Sonja Kujansuu – Portfolio'
 const metaDescription: string = (etusivuData as any).metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
 
@@ -43,9 +43,7 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
           <p class="hero__subheading">{introSubheading}</p>
         )}
         <div class="hero__body">
-          {introBody?.map((kappale: string) => (
-            <p>{kappale}</p>
-          ))}
+          {IntroBodyContent && <IntroBodyContent />}
         </div>
         <a href="#tyot" class="hero__arrow" aria-label="Siirry töihin">↓</a>
       </div>

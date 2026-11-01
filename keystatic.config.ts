@@ -30,7 +30,7 @@ export default config({
     etusivu: singleton({
       label: 'Etusivu',
       path: 'src/content/etusivu',
-      format: { data: 'json' },
+      format: { contentField: 'introBody' },
       schema: {
         heroImage: fields.image({
           label: 'Hero-kuva',
@@ -54,17 +54,10 @@ export default config({
           defaultValue: '',
           validation: { isRequired: false },
         }),
-        introBody: fields.array(
-          fields.text({
-            label: 'Kappale',
-            multiline: true,
-          }),
-          {
-            label: 'Intro-tekstikappaleet',
-            description: 'Jokainen rivi on oma kappaleensa',
-            itemLabel: (props) => props.value.slice(0, 60) + (props.value.length > 60 ? '…' : ''),
-          },
-        ),
+        introBody: fields.markdoc({
+          label: 'Intro-teksti',
+          description: 'Esittelyteksti etusivulle. Voit käyttää muotoiluja.',
+        }),
         contactHeading: fields.text({
           label: 'Contact-otsikko',
           defaultValue: 'Contact',
