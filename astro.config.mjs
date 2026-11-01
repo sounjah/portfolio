@@ -11,9 +11,9 @@ export default defineConfig({
   output: 'server',
   adapter: isProduction
     ? cloudflare({
-        mode: 'directory',
         imageService: 'passthrough',
         sessionKVBindingName: undefined,
+        platformProxy: { enabled: true },
       })
     : node({ mode: 'standalone' }),
   integrations: [react(), markdoc(), keystatic()],
