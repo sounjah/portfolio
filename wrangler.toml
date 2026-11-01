@@ -6,10 +6,9 @@ pages_build_output_dir = "./dist"
 # Keystatic-hallintapaneeli (/keystatic) käyttää näitä Node.js-moduuleja.
 compatibility_flags = ["nodejs_compat"]
 
-# Estää @astrojs/cloudflare-adapteria lisäämästä automaattista ASSETS-bindingiä,
-# joka on kielletty nimi Cloudflare Pages -projekteissa.
-[assets]
-binding = "STATIC_ASSETS"
+# Huom: ASSETS-binding konfiguroidaan Cloudflare-dashboardissa
+# Workers & Pages → portfolio → Settings → Bindings → Add binding
+# Type: Static assets, Variable name: ASSETS
 
 [observability.logs]
 enabled = true

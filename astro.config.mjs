@@ -12,7 +12,6 @@ export default defineConfig({
     ? cloudflare({
         imageService: 'passthrough',
         sessionKVBindingName: undefined,
-        platformProxy: { enabled: true },
       })
     : node({ mode: 'standalone' }),
   integrations: [react(), markdoc()],
