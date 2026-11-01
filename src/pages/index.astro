@@ -10,10 +10,9 @@ import { getCollection } from 'astro:content'
 // Tämä toimii Cloudflare Workers -ympäristössä toisin kuin @keystatic/core/reader,
 // joka vaatii node:fs-moduulin. Keystatic kirjoittaa tiedostoon src/content/etusivu.json.
 import etusivuData from '../content/etusivu.json'
-import jarjestysData from '../content/jarjestys.json'
 
 const projektitRaw = await getCollection('projektit')
-const jarjestys: string[] = (jarjestysData as any).projektiJarjestys ?? []
+const jarjestys: string[] = (etusivuData as any).projektiJarjestys ?? []
 // Järjestetyt ensin, sitten loput (listaan lisäämättömät) perässä, piilotetut suodatetaan pois
 const jarjestetyt = jarjestys
   .map(slug => projektitRaw.find(p => p.id === slug))

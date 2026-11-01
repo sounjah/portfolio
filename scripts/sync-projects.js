@@ -1,11 +1,11 @@
 import { readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 
-const jarjestysPath = 'src/content/jarjestys.json'
+const etusivuPath = 'src/content/etusivu.json'
 const projektitDir = 'src/content/projektit'
 
-const jarjestys = JSON.parse(readFileSync(jarjestysPath, 'utf8'))
-const nykyinenJarjestys = jarjestys.projektiJarjestys ?? []
+const etusivu = JSON.parse(readFileSync(etusivuPath, 'utf8'))
+const nykyinenJarjestys = etusivu.projektiJarjestys ?? []
 
 // Lue kaikki .mdoc-slugit tiedostojärjestelmästä
 const kaikki = readdirSync(projektitDir)
@@ -16,8 +16,8 @@ const kaikki = readdirSync(projektitDir)
 const uudet = kaikki.filter(slug => !nykyinenJarjestys.includes(slug))
 
 if (uudet.length > 0) {
-  jarjestys.projektiJarjestys = [...nykyinenJarjestys, ...uudet]
-  writeFileSync(jarjestysPath, JSON.stringify(jarjestys, null, 2) + '\n')
+  etusivu.projektiJarjestys = [...nykyinenJarjestys, ...uudet]
+  writeFileSync(etusivuPath, JSON.stringify(etusivu, null, 2) + '\n')
   console.log('sync-projects: lisätty ' + uudet.join(', '))
 } else {
   console.log('sync-projects: ei muutoksia')
