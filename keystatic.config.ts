@@ -20,7 +20,7 @@ export default config({
       name: 'Sonja Kujansuu – Portfolio',
     },
     navigation: {
-      Etusivu: ['etusivu'],
+      Etusivu: ['etusivu', 'introBody'],
       Sisältö: ['projektit'],
     },
   },
@@ -30,7 +30,7 @@ export default config({
     etusivu: singleton({
       label: 'Etusivu',
       path: 'src/content/etusivu',
-      format: { contentField: 'introBody' },
+      format: { data: 'json' },
       schema: {
         heroImage: fields.image({
           label: 'Hero-kuva',
@@ -53,10 +53,6 @@ export default config({
           description: 'Esim. "UI/UX Designer & Design Systems Specialist"',
           defaultValue: '',
           validation: { isRequired: false },
-        }),
-        introBody: fields.markdoc({
-          label: 'Intro-teksti',
-          description: 'Esittelyteksti etusivulle. Voit käyttää muotoiluja.',
         }),
         contactHeading: fields.text({
           label: 'Contact-otsikko',
@@ -86,6 +82,19 @@ export default config({
             itemLabel: (props) => props.value ?? '(tyhjä)',
           },
         ),
+      },
+    }),
+
+    // ── SINGLETON: Intro-teksti (markdoc-editori) ─────────────────────
+    introBody: singleton({
+      label: 'Intro-teksti',
+      path: 'src/content/etusivu',
+      format: { contentField: 'introBody' },
+      schema: {
+        introBody: fields.markdoc({
+          label: 'Intro-teksti',
+          description: 'Esittelyteksti etusivulle. Voit käyttää muotoiluja.',
+        }),
       },
     }),
   },
