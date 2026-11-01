@@ -5,25 +5,29 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
 import { getCollection } from 'astro:content'
-import { DocumentRenderer } from '@keystatic/core/renderer'
-import etusivuData from '../content/etusivu.json'
 
 const projektitRaw = await getCollection('projektit')
-const jarjestys: string[] = (etusivuData as any).projektiJarjestys ?? []
+
+// Etusivu-data luetaan .mdoc-tiedostosta (Keystatic tallentaa sinne)
+const mdocFiles = import.meta.glob('../content/etusivu.mdoc', { eager: true })
+const etusivuMdoc = mdocFiles['../content/etusivu.mdoc'] as any
+const IntroBodyContent = etusivuMdoc?.Content ?? null
+const fm = etusivuMdoc?.frontmatter ?? {}
+
+const jarjestys: string[] = fm.projektiJarjestys ?? []
 // Järjestetyt ensin, sitten loput (listaan lisäämättömät) perässä, piilotetut suodatetaan pois
 const jarjestetyt = jarjestys
-  .map(slug => projektitRaw.find(p => p.id === slug))
+  .map((slug: string) => projektitRaw.find(p => p.id === slug))
   .filter(Boolean)
 const loput = projektitRaw.filter(p => !jarjestys.includes(p.id))
 const projektit = [...jarjestetyt, ...loput].filter(p => !p.data.hidden)
 
-const heroImage: string | undefined = (etusivuData as any).heroImage ?? undefined
-const heroImageAlt: string = (etusivuData as any).heroImageAlt ?? 'Sonja Kujansuu'
-const introHeading: string = (etusivuData as any).introHeading ?? 'Welcome to my portfolio!'
-const introSubheading: string = (etusivuData as any).introSubheading ?? ''
-const introBody = (etusivuData as any).introBody ?? []
-const metaTitle: string = (etusivuData as any).metaTitle ?? 'Sonja Kujansuu – Portfolio'
-const metaDescription: string = (etusivuData as any).metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
+const heroImage: string | undefined = fm.heroImage ?? undefined
+const heroImageAlt: string = fm.heroImageAlt ?? 'Sonja Kujansuu'
+const introHeading: string = fm.introHeading ?? 'Welcome to my portfolio!'
+const introSubheading: string = fm.introSubheading ?? ''
+const metaTitle: string = fm.metaTitle ?? 'Sonja Kujansuu – Portfolio'
+const metaDescription: string = fm.metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
 
 const heroSrc = heroImage ?? '/images/heroImage.jpeg'
 ---
@@ -40,7 +44,7 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
           <p class="hero__subheading">{introSubheading}</p>
         )}
         <div class="hero__body">
-          <DocumentRenderer document={introBody} />
+          {IntroBodyContent && <IntroBodyContent />}
         </div>
         <a href="#tyot" class="hero__arrow" aria-label="Siirry töihin">↓</a>
       </div>

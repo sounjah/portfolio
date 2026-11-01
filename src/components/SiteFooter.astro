@@ -1,13 +1,14 @@
 ---
-import contactData from '../content/etusivu.json'
-
 interface Props {
   showContact?: boolean
 }
 
 const { showContact = false } = Astro.props
 
-const contactHeading: string = (contactData as any).contactHeading ?? 'Contact'
+const mdocFiles = import.meta.glob('../content/etusivu.mdoc', { eager: true })
+const etusivuMdoc = mdocFiles['../content/etusivu.mdoc'] as any
+const fm = etusivuMdoc?.frontmatter ?? {}
+const contactHeading: string = fm.contactHeading ?? 'Contact'
 const year = new Date().getFullYear()
 ---
 

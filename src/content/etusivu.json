@@ -3,22 +3,7 @@
   "heroImageAlt": "Sonja Kujansuu",
   "introHeading": "Hello, I'm Sonja",
   "introSubheading": "UI/UX Designer & Design Systems Specialist",
-  "introBody": [
-    {
-      "type": "paragraph",
-      "children": [
-        { "text": "I'm a UI and UX specialist with a passion for accessible, user-centered services. I take ideas from first sketch to launch and keep improving them afterwards, and my roots in print design still keep me sweating the details." }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "children": [
-        { "text": "Take a look at the projects below." }
-      ]
-    }
-  ],
   "contactHeading": "Contact",
-  "contactEmail": "kujansuu.sonja (a) gmail.com",
   "metaTitle": "Sonja Kujansuu – Portfolio",
   "metaDescription": "Sonja Kujansuun UX- ja palvelumuotoilun portfolio",
   "projektiJarjestys": [
