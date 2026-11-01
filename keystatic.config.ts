@@ -110,6 +110,19 @@ export default config({
           name: { label: 'Otsikko' },
           slug: { label: 'URL-slug' },
         }),
+        ingress: fields.text({
+          label: 'Ingressi',
+          description: 'Lyhyt kuvaus projektin etusivukorttiin ja projektin alkuun',
+          multiline: true,
+        }),
+        body: fields.markdoc({
+          label: 'Sisältö',
+        }),
+        coverImage: fields.image({
+          label: 'Kansikuva',
+          directory: 'public/images/projektit',
+          publicPath: '/images/projektit/',
+        }),
         year: fields.text({
           label: 'Vuosi',
           description: 'esim. 2024',
@@ -131,16 +144,6 @@ export default config({
             itemLabel: (props) => props.value,
           },
         ),
-        ingress: fields.text({
-          label: 'Ingressi',
-          description: 'Lyhyt kuvaus projektin etusivukorttiin ja projektin alkuun',
-          multiline: true,
-        }),
-        coverImage: fields.image({
-          label: 'Kansikuva',
-          directory: 'public/images/projektit',
-          publicPath: '/images/projektit/',
-        }),
         projectUrl: fields.url({
           label: 'Projektin URL',
           description: 'Linkki toteutettuun palveluun (valinnainen)',
@@ -161,9 +164,6 @@ export default config({
           label: 'Piilota etusivulta',
           description: 'Ruksattu projekti ei näy etusivun korttilistassa.',
           defaultValue: false,
-        }),
-        body: fields.markdoc({
-          label: 'Sisältö',
         }),
       },
     }),
