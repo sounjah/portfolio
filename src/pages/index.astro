@@ -84,6 +84,7 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
                 </div>
                 <div class="card__body">
                   <h3 class="card__title">{projekti.data.title}</h3>
+                  {projekti.data.year && <p class="card__year">{projekti.data.year}</p>}
                   <p class="card__desc">{projekti.data.ingress}</p>
                 </div>
               </article>
@@ -98,6 +99,7 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
               </div>
               <div class="card__body">
                 <h3 class="card__title">{projekti.data.title}</h3>
+                {projekti.data.year && <p class="card__year">{projekti.data.year}</p>}
                 <p class="card__desc">{projekti.data.ingress}</p>
                 <span class="btn btn--primary">
                   <span class="btn__text">Want to know more?</span>
