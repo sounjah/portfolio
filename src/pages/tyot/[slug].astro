@@ -40,7 +40,7 @@ const urlLabel = projectUrlLabel || 'Katso sivusto'
     <article class="project">
       <div class="project__grid">
 
-        <!-- ── VASEN: kuva + tägit + URL ───────────────────── -->
+        <!-- ── VASEN: kuva + tägit ──────────────────────────── -->
         <div class="project__media">
           <img
             src={coverSrc}
@@ -54,6 +54,19 @@ const urlLabel = projectUrlLabel || 'Katso sivusto'
               ))}
             </ul>
           )}
+        </div>
+
+        <!-- ── OIKEA: teksti + painike ───────────────────── -->
+        <div class="project__content">
+          <h1 class="project__title">{title}</h1>
+          <p class="project__year">{year}</p>
+
+          <p class="project__ingress">{ingress}</p>
+
+          <div class="project__body">
+            <Content />
+          </div>
+
           {projectUrl && (
             <a
               href={projectUrl}
@@ -65,18 +78,6 @@ const urlLabel = projectUrlLabel || 'Katso sivusto'
               <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
             </a>
           )}
-        </div>
-
-        <!-- ── OIKEA: teksti ──────────────────────────────── -->
-        <div class="project__content">
-          <h1 class="project__title">{title}</h1>
-          <p class="project__year">{year}</p>
-
-          <p class="project__ingress">{ingress}</p>
-
-          <div class="project__body">
-            <Content />
-          </div>
         </div>
 
       </div>
