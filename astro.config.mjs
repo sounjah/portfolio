@@ -25,9 +25,6 @@ export default defineConfig({
         '@keystatic/core/ui',
       ],
     },
-    ssr: {
-      noExternal: ['@keystatic/core', '@keystatic/astro'],
-    },
   },
 
   // Keystatic lukee nämä getSecret()-funktiolla astro:env/server-moduulista.
