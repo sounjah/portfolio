@@ -21,7 +21,7 @@ export default config({
     },
     navigation: {
       Etusivu: ['etusivu'],
-      Sisältö: ['projektit'],
+      Sisältö: ['projektit', 'jarjestys'],
     },
   },
 
@@ -82,13 +82,22 @@ export default config({
           defaultValue: 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio',
           multiline: true,
         }),
+      },
+    }),
+
+    // ── SINGLETON: Projektien järjestys ──────────────────────────────────
+    jarjestys: singleton({
+      label: 'Projektien järjestys',
+      path: 'src/content/jarjestys',
+      format: { data: 'json' },
+      schema: {
         projektiJarjestys: fields.array(
           fields.relationship({
             label: 'Projekti',
             collection: 'projektit',
           }),
           {
-            label: 'Projektien järjestys',
+            label: 'Järjestys',
             description: 'Raahaa projektit haluamaasi järjestykseen. Ylin näkyy etusivulla ensimmäisenä.',
             itemLabel: (props) => props.value ?? '(tyhjä)',
           },
