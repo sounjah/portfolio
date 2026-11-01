@@ -11,7 +11,8 @@ import { getCollection } from 'astro:content'
 // joka vaatii node:fs-moduulin. Keystatic kirjoittaa tiedostoon src/content/etusivu.json.
 import etusivuData from '../content/etusivu.json'
 
-const projektit = await getCollection('projektit')
+const projektitRaw = await getCollection('projektit')
+const projektit = projektitRaw.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
 
 const heroImage: string | undefined = (etusivuData as any).heroImage ?? undefined
 const heroImageAlt: string = (etusivuData as any).heroImageAlt ?? 'Sonja Kujansuu'

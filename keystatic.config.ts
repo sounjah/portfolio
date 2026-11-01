@@ -99,6 +99,12 @@ export default config({
           name: { label: 'Otsikko' },
           slug: { label: 'URL-slug' },
         }),
+        order: fields.number({
+          label: 'Järjestys',
+          description: 'Pienin numero näytetään ensin. Esim. 1, 2, 3...',
+          defaultValue: 99,
+          validation: { isRequired: true, min: 1 },
+        }),
         year: fields.text({
           label: 'Vuosi',
           description: 'esim. 2024',
