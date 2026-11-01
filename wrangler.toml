@@ -1,18 +1,8 @@
 name = "portfolio"
 compatibility_date = "2025-01-01"
-pages_build_output_dir = "./dist"
 
 # nodejs_compat tarvitaan Keystatic API-reittejä varten (crypto, fs, path).
-# Keystatic-hallintapaneeli (/keystatic) käyttää näitä Node.js-moduuleja.
 compatibility_flags = ["nodejs_compat"]
-
-# Huom: ASSETS-binding konfiguroidaan Cloudflare-dashboardissa
-# Workers & Pages → portfolio → Settings → Bindings → Add binding
-# Type: Static assets, Variable name: ASSETS
-
-[observability.logs]
-enabled = true
-invocation_logs = true
 
 # ── Keystatic CMS – ympäristömuuttujat ───────────────────────────────
 # Lisää nämä myös Cloudflare Pages -projektin asetuksiin:
