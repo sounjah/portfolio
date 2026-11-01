@@ -157,6 +157,11 @@ export default config({
           description: 'Ruksaa tämä jos projektilla ei ole omaa alasivua. Näkyy vain etusivun kortissa ilman painiketta.',
           defaultValue: false,
         }),
+        hidden: fields.checkbox({
+          label: 'Piilota etusivulta',
+          description: 'Ruksattu projekti ei näy etusivun korttilistassa.',
+          defaultValue: false,
+        }),
         body: fields.markdoc({
           label: 'Sisältö',
         }),
