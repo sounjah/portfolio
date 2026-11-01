@@ -28,7 +28,7 @@
   /* ── Fontit ── */
   --font-heading: 'Special Gothic Expanded One', system-ui, sans-serif;
   --font-body:    'Roboto', system-ui, sans-serif;        /* Regular 400 */
-  --font-alt:     'Roboto Mono', monospace;               /* Bold 700 */
+  --font-alt:     'Roboto Mono', monospace;               /* Medium 500 */
 
   /* Vanhat nimet → uudet muuttujat (yhteensopivuus) */
   --font-serif: var(--font-heading);
@@ -410,9 +410,9 @@ a {
 }
 
 .contact {
-  max-width: calc(var(--max-width) + var(--gutter) * 2);
+  max-width: var(--max-width);
   margin-inline: auto;
-  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  padding: 3rem clamp(1.5rem, 3vw, 2.5rem);
   background: var(--color-extra-light);
   border-radius: var(--radius);
   display: flex;
@@ -431,8 +431,9 @@ a {
 
 .site-footer__copy {
   padding: 1.25rem var(--gutter);
-  text-align: right;
+  text-align: center;
   font-family: var(--font-alt);
+  font-weight: 500;
   font-size: 0.875rem;
   color: var(--color-dark);
   max-width: calc(var(--max-width) + var(--gutter) * 2);
