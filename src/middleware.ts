@@ -1,30 +1,20 @@
 import { defineMiddleware } from 'astro:middleware'
-
-// Astro v6 + @astrojs/cloudflare: ympäristömuuttujat haetaan cloudflare:workers-moduulista
-let cfEnv: Record<string, string> | undefined
-
-try {
-  // Dynaaminen import jotta ei kaadu Node-ympäristössä (dev-palvelin)
-  const mod = await import('cloudflare:workers' as string)
-  cfEnv = mod.env
-} catch {
-  // Dev-ympäristössä cloudflare:workers ei ole saatavilla – käytetään process.env
-  cfEnv = undefined
-}
+import { getSecret } from 'astro:env/server'
 
 export const onRequest = defineMiddleware(async (_context, next) => {
-  // Injektoidaan Cloudflare-ympäristömuuttujat process.env:iin
-  // jotta @keystatic/core löytää ne
-  if (cfEnv) {
-    globalThis.process ??= { env: {} } as any
-    globalThis.process.env ??= {}
-    if (cfEnv.KEYSTATIC_GITHUB_CLIENT_ID)
-      globalThis.process.env.KEYSTATIC_GITHUB_CLIENT_ID = cfEnv.KEYSTATIC_GITHUB_CLIENT_ID
-    if (cfEnv.KEYSTATIC_GITHUB_CLIENT_SECRET)
-      globalThis.process.env.KEYSTATIC_GITHUB_CLIENT_SECRET = cfEnv.KEYSTATIC_GITHUB_CLIENT_SECRET
-    if (cfEnv.KEYSTATIC_SECRET)
-      globalThis.process.env.KEYSTATIC_SECRET = cfEnv.KEYSTATIC_SECRET
-  }
+  // Injektoidaan Keystatic-ympäristömuuttujat process.env:iin.
+  // getSecret() toimii sekä Cloudflare Workers- että Node-ympäristössä
+  // koska astro.config.mjs:ssä on määritelty env-skeema näille muuttujille.
+  globalThis.process ??= { env: {} } as any
+  globalThis.process.env ??= {}
+
+  const clientId = getSecret('KEYSTATIC_GITHUB_CLIENT_ID')
+  const clientSecret = getSecret('KEYSTATIC_GITHUB_CLIENT_SECRET')
+  const secret = getSecret('KEYSTATIC_SECRET')
+
+  if (clientId) globalThis.process.env.KEYSTATIC_GITHUB_CLIENT_ID = clientId
+  if (clientSecret) globalThis.process.env.KEYSTATIC_GITHUB_CLIENT_SECRET = clientSecret
+  if (secret) globalThis.process.env.KEYSTATIC_SECRET = secret
 
   return next()
 })
