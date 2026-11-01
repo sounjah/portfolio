@@ -8,7 +8,6 @@ interface Props {
 const { showContact = false } = Astro.props
 
 const contactHeading: string = (contactData as any).contactHeading ?? 'Contact'
-const contactEmail: string = (contactData as any).contactEmail ?? 'kujansuu.sonja@gmail.com'
 const year = new Date().getFullYear()
 ---
 
@@ -16,9 +15,15 @@ const year = new Date().getFullYear()
   {showContact && (
     <section class="contact" id="contact" aria-labelledby="contact-heading">
       <h2 class="contact__heading" id="contact-heading">{contactHeading}</h2>
-      <p class="contact__email">
-        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-      </p>
+      <a
+        href="https://www.linkedin.com/in/sonjakujansuu/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--primary"
+      >
+        <span class="btn__text">Connect with me on LinkedIn</span>
+        <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
+      </a>
     </section>
   )}
   <p class="site-footer__copy">© Sonja Kujansuu {year}</p>

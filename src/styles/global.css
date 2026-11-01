@@ -406,39 +406,33 @@ a {
 
 /* ── FOOTER ──────────────────────────────────────────────── */
 .site-footer {
-  border-top: 1px solid rgba(0,0,0,0.08);
   margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .contact {
   max-width: calc(var(--max-width) + var(--gutter) * 2);
   margin-inline: auto;
-  padding: clamp(3rem, 6vw, 4rem) var(--gutter) clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--color-extra-light);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .contact__heading {
   font-family: var(--font-heading);
   font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 500;
+  font-weight: 900;
   color: var(--color-dark);
-  margin-bottom: 1rem;
-}
-
-.contact__email a {
-  font-size: 1.0625rem;
-  color: var(--color-accent-1);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.contact__email a:hover {
-  color: var(--color-dark);
+  margin: 0;
 }
 
 .site-footer__copy {
-  border-top: 1px solid rgba(0,0,0,0.06);
   padding: 1.25rem var(--gutter);
-  text-align: center;
+  text-align: right;
+  font-family: var(--font-alt);
   font-size: 0.875rem;
   color: var(--color-dark);
   max-width: calc(var(--max-width) + var(--gutter) * 2);
