@@ -377,7 +377,7 @@ a {
 }
 
 .btn--primary:hover .btn__arrow {
-  filter: none; /* palaa accent-1-väriksi */
+  filter: brightness(0) saturate(100%) invert(27%) sepia(85%) saturate(700%) hue-rotate(10deg) brightness(90%); /* #973906 */
 }
 
 /* ── Secondary ── */
@@ -416,7 +416,7 @@ a {
 
 /* ── FOOTER ──────────────────────────────────────────────── */
 .site-footer {
-  margin-top: clamp(3rem, 6vw, 5rem);
+  margin-top: 5rem;
   padding: 0 var(--gutter);
 }
 
