@@ -20,7 +20,7 @@ export default config({
       name: 'Sonja Kujansuu – Portfolio',
     },
     navigation: {
-      Etusivu: ['etusivu', 'introBody'],
+      Etusivu: ['etusivu'],
       Sisältö: ['projektit'],
     },
   },
@@ -54,6 +54,16 @@ export default config({
           defaultValue: '',
           validation: { isRequired: false },
         }),
+        introBody: fields.document({
+          label: 'Intro-teksti',
+          description: 'Esittelyteksti etusivulle.',
+          formatting: {
+            inlineMarks: { bold: true, italic: true },
+            listTypes: { unordered: true, ordered: true },
+            softBreaks: true,
+          },
+          links: true,
+        }),
         contactHeading: fields.text({
           label: 'Contact-otsikko',
           defaultValue: 'Contact',
@@ -85,18 +95,6 @@ export default config({
       },
     }),
 
-    // ── SINGLETON: Intro-teksti (markdoc-editori) ─────────────────────
-    introBody: singleton({
-      label: 'Intro-teksti',
-      path: 'src/content/etusivu',
-      format: { contentField: 'introBody' },
-      schema: {
-        introBody: fields.markdoc({
-          label: 'Intro-teksti',
-          description: 'Esittelyteksti etusivulle. Voit käyttää muotoiluja.',
-        }),
-      },
-    }),
   },
 
   // ── COLLECTION: Projektit ────────────────────────────────────────────
