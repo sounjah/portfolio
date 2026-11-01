@@ -82,6 +82,17 @@ export default config({
           defaultValue: 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio',
           multiline: true,
         }),
+        projektiJarjestys: fields.array(
+          fields.relationship({
+            label: 'Projekti',
+            collection: 'projektit',
+          }),
+          {
+            label: 'Projektien järjestys',
+            description: 'Raahaa projektit haluamaasi järjestykseen. Ylin näkyy etusivulla ensimmäisenä.',
+            itemLabel: (props) => props.value ?? '(tyhjä)',
+          },
+        ),
       },
     }),
   },
@@ -98,12 +109,6 @@ export default config({
         title: fields.slug({
           name: { label: 'Otsikko' },
           slug: { label: 'URL-slug' },
-        }),
-        order: fields.number({
-          label: 'Järjestys',
-          description: 'Pienin numero näytetään ensin. Esim. 1, 2, 3...',
-          defaultValue: 99,
-          validation: { isRequired: true, min: 1 },
         }),
         year: fields.text({
           label: 'Vuosi',

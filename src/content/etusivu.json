@@ -10,5 +10,10 @@
   "contactHeading": "Contact",
   "contactEmail": "kujansuu.sonja (a) gmail.com",
   "metaTitle": "Sonja Kujansuu – Portfolio",
-  "metaDescription": "Sonja Kujansuun UX- ja palvelumuotoilun portfolio"
+  "metaDescription": "Sonja Kujansuun UX- ja palvelumuotoilun portfolio",
+  "projektiJarjestys": [
+    "website-and-brand-redesign",
+    "data-driven-development",
+    "two-leasing-services-one-new-concept-concept-and-ui-design"
+  ]
 }

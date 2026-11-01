@@ -12,7 +12,12 @@ import { getCollection } from 'astro:content'
 import etusivuData from '../content/etusivu.json'
 
 const projektitRaw = await getCollection('projektit')
-const projektit = projektitRaw.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+const jarjestys: string[] = (etusivuData as any).projektiJarjestys ?? []
+const projektit = jarjestys.length > 0
+  ? jarjestys
+      .map(slug => projektitRaw.find(p => p.id === slug))
+      .filter(Boolean)
+  : projektitRaw
 
 const heroImage: string | undefined = (etusivuData as any).heroImage ?? undefined
 const heroImageAlt: string = (etusivuData as any).heroImageAlt ?? 'Sonja Kujansuu'
