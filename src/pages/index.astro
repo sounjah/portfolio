@@ -5,31 +5,37 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import SiteHeader from '../components/SiteHeader.astro'
 import SiteFooter from '../components/SiteFooter.astro'
 import { getCollection } from 'astro:content'
+import mdocRaw from '../content/etusivu.mdoc?raw'
 
 const projektitRaw = await getCollection('projektit')
 
-// Etusivu-data luetaan .mdoc-tiedostosta (Keystatic tallentaa sinne)
-const mdocFiles = import.meta.glob('../content/etusivu.mdoc', { eager: true })
-const etusivuMdoc = mdocFiles['../content/etusivu.mdoc'] as any
-const IntroBodyContent = etusivuMdoc?.Content ?? null
-const fm = etusivuMdoc?.frontmatter ?? {}
+// Parsitaan frontmatter yksinkertaisella regexillä
+const fmMatch = mdocRaw.match(/^---\n([\s\S]*?)\n---/)
+const fmRaw = fmMatch?.[1] ?? ''
+const parseFm = (key: string) => fmRaw.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]?.trim() ?? ''
+const parseList = (key: string) => {
+  const m = fmRaw.match(new RegExp(`${key}:\\n((?:  - .+\\n?)*)`, 'm'))
+  return m ? m[1].trim().split('\n').map(r => r.replace(/^\s*- /, '').trim()) : []
+}
 
-const jarjestys: string[] = fm.projektiJarjestys ?? []
-// Järjestetyt ensin, sitten loput (listaan lisäämättömät) perässä, piilotetut suodatetaan pois
+// Sisältö (markdoc-teksti) on frontmatterin jälkeen
+const introBodyRaw = mdocRaw.replace(/^---\n[\s\S]*?\n---\n*/, '').trim()
+
+const jarjestys: string[] = parseList('projektiJarjestys')
 const jarjestetyt = jarjestys
   .map((slug: string) => projektitRaw.find(p => p.id === slug))
   .filter(Boolean)
 const loput = projektitRaw.filter(p => !jarjestys.includes(p.id))
 const projektit = [...jarjestetyt, ...loput].filter(p => !p.data.hidden)
 
-const heroImage: string | undefined = fm.heroImage ?? undefined
-const heroImageAlt: string = fm.heroImageAlt ?? 'Sonja Kujansuu'
-const introHeading: string = fm.introHeading ?? 'Welcome to my portfolio!'
-const introSubheading: string = fm.introSubheading ?? ''
-const metaTitle: string = fm.metaTitle ?? 'Sonja Kujansuu – Portfolio'
-const metaDescription: string = fm.metaDescription ?? 'Sonja Kujansuun UX- ja palvelumuotoilun portfolio'
+const heroImage: string = parseFm('heroImage')
+const heroImageAlt: string = parseFm('heroImageAlt') || 'Sonja Kujansuu'
+const introHeading: string = parseFm('introHeading') || 'Welcome to my portfolio!'
+const introSubheading: string = parseFm('introSubheading') || ''
+const metaTitle: string = parseFm('metaTitle') || 'Sonja Kujansuu – Portfolio'
+const metaDescription: string = parseFm('metaDescription') || ''
 
-const heroSrc = heroImage ?? '/images/heroImage.jpeg'
+const heroSrc = heroImage || '/images/heroImage.jpg'
 ---
 
 <BaseLayout title={metaTitle} description={metaDescription}>
@@ -44,7 +50,9 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
           <p class="hero__subheading">{introSubheading}</p>
         )}
         <div class="hero__body">
-          {IntroBodyContent && <IntroBodyContent />}
+          {introBodyRaw.split(/\n\n+/).filter(Boolean).map(p => (
+            <p set:html={p.replace(/\n/g, '<br>')} />
+          ))}
         </div>
         <a href="#tyot" class="hero__arrow" aria-label="Siirry töihin">↓</a>
       </div>

@@ -5,10 +5,10 @@ interface Props {
 
 const { showContact = false } = Astro.props
 
-const mdocFiles = import.meta.glob('../content/etusivu.mdoc', { eager: true })
-const etusivuMdoc = mdocFiles['../content/etusivu.mdoc'] as any
-const fm = etusivuMdoc?.frontmatter ?? {}
-const contactHeading: string = fm.contactHeading ?? 'Contact'
+import mdocRaw from '../content/etusivu.mdoc?raw'
+const fmMatch = mdocRaw.match(/^---\n([\s\S]*?)\n---/)
+const fmRaw = fmMatch?.[1] ?? ''
+const contactHeading: string = fmRaw.match(/^contactHeading:\s*(.+)$/m)?.[1]?.trim() ?? 'Contact'
 const year = new Date().getFullYear()
 ---
 
