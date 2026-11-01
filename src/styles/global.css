@@ -325,12 +325,15 @@ a {
 /* ── Primary ── */
 .btn--primary {
   position: relative;
-  height: 48px;
-  padding: 0 1.75rem;
+  min-height: 48px;
+  height: auto;
+  padding: 0.75rem 1.75rem;
   border-radius: 999px;
   color: var(--color-extra-light);
   overflow: hidden;
   isolation: isolate;
+  white-space: normal;
+  text-align: center;
 }
 
 /* Tausta ennen hoveria */
@@ -414,6 +417,7 @@ a {
 /* ── FOOTER ──────────────────────────────────────────────── */
 .site-footer {
   margin-top: clamp(3rem, 6vw, 5rem);
+  padding: 0 var(--gutter);
 }
 
 .contact {
@@ -683,5 +687,10 @@ a {
   .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
