@@ -5,7 +5,7 @@ const files = [
   'dist/server/.prerender/wrangler.json',
 ]
 
-const forbiddenKeys = ['assets', 'rules', 'main', 'previews', 'observability', 'no_bundle']
+const forbiddenKeys = ['rules', 'previews', 'observability', 'no_bundle']
 
 for (const file of files) {
   if (!existsSync(file)) {
@@ -25,5 +25,16 @@ for (const file of files) {
     console.log('Fixed ' + file)
   } else {
     console.log('No changes needed: ' + file)
+  }
+}
+
+// Korjaa .wrangler/deploy/config.json: poista prerenderWorkerConfigPath jos tiedostoa ei ole
+const deployConfig = '.wrangler/deploy/config.json'
+if (existsSync(deployConfig)) {
+  const data = JSON.parse(readFileSync(deployConfig, 'utf8'))
+  if (data.prerenderWorkerConfigPath && !existsSync(data.prerenderWorkerConfigPath)) {
+    delete data.prerenderWorkerConfigPath
+    writeFileSync(deployConfig, JSON.stringify(data))
+    console.log('Fixed ' + deployConfig)
   }
 }
