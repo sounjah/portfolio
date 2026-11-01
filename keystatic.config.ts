@@ -117,11 +117,11 @@ export default config({
         tag: fields.select({
           label: 'Tyyppi',
           options: [
-            { label: 'Projekti', value: 'Projekti' },
-            { label: 'Jatkuva kehitys', value: 'Jatkuva kehitys' },
-            { label: 'Konseptointi', value: 'Konseptointi' },
+            { label: 'Project', value: 'Project' },
+            { label: 'Continuous development', value: 'Continuous development' },
+            { label: 'Concept', value: 'Concept' },
           ],
-          defaultValue: 'Projekti',
+          defaultValue: 'Project',
         }),
         keywords: fields.array(
           fields.text({ label: 'Avainsana' }),
