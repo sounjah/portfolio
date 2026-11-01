@@ -614,6 +614,11 @@ a {
   text-underline-offset: 3px;
 }
 
+/* Deskari: näytä vain vasen painike, piilota mobiilipainike */
+.project__btn--mobile {
+  display: none;
+}
+
 /* ── RESPONSIVE – project ────────────────────────────────── */
 @media (max-width: 720px) {
   .project__grid {
@@ -622,6 +627,16 @@ a {
 
   .project__title {
     font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  /* Mobiili: piilota deskari-painike, näytä mobiilipainike tekstin alla */
+  .project__btn--desktop {
+    display: none;
+  }
+
+  .project__btn--mobile {
+    display: inline-flex;
+    margin-top: 2.5rem;
   }
 }
 
