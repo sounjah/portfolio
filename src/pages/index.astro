@@ -13,11 +13,12 @@ import etusivuData from '../content/etusivu.json'
 
 const projektitRaw = await getCollection('projektit')
 const jarjestys: string[] = (etusivuData as any).projektiJarjestys ?? []
-const projektit = jarjestys.length > 0
-  ? jarjestys
-      .map(slug => projektitRaw.find(p => p.id === slug))
-      .filter(Boolean)
-  : projektitRaw
+// Järjestetyt ensin, sitten loput (listaan lisäämättömät) perässä
+const jarjestetyt = jarjestys
+  .map(slug => projektitRaw.find(p => p.id === slug))
+  .filter(Boolean)
+const loput = projektitRaw.filter(p => !jarjestys.includes(p.id))
+const projektit = [...jarjestetyt, ...loput]
 
 const heroImage: string | undefined = (etusivuData as any).heroImage ?? undefined
 const heroImageAlt: string = (etusivuData as any).heroImageAlt ?? 'Sonja Kujansuu'
