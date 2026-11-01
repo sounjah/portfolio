@@ -48,7 +48,7 @@ const urlLabel = projectUrlLabel || 'Katso sivusto'
             class="project__cover"
           />
           {keywords && keywords.length > 0 && (
-            <ul class="project__keywords" aria-label="Avainsanat">
+            <ul class="project__keywords project__keywords--desktop" aria-label="Avainsanat">
               {keywords.map((kw: string) => (
                 <li class="project__keyword">{kw}</li>
               ))}
@@ -71,6 +71,14 @@ const urlLabel = projectUrlLabel || 'Katso sivusto'
         <div class="project__content">
           <h1 class="project__title">{title}</h1>
           <p class="project__year">{year}</p>
+
+          {keywords && keywords.length > 0 && (
+            <ul class="project__keywords project__keywords--mobile" aria-label="Avainsanat">
+              {keywords.map((kw: string) => (
+                <li class="project__keyword">{kw}</li>
+              ))}
+            </ul>
+          )}
 
           <p class="project__ingress">{ingress}</p>
 

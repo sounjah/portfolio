@@ -610,8 +610,12 @@ a {
   text-underline-offset: 3px;
 }
 
-/* Deskari: näytä vain vasen painike, piilota mobiilipainike */
+/* Deskari: näytä vain vasen painike ja vasen tägit, piilota mobiiliversiot */
 .project__btn--mobile {
+  display: none;
+}
+
+.project__keywords--mobile {
   display: none;
 }
 
@@ -629,7 +633,7 @@ a {
     font-size: clamp(1.5rem, 7vw, 2rem);
   }
 
-  /* Mobiili: piilota deskari-painike, näytä mobiilipainike tekstin alla */
+  /* Mobiili: piilota deskari-versiot, näytä mobiiliversiot */
   .project__btn--desktop {
     display: none;
   }
@@ -637,6 +641,14 @@ a {
   .project__btn--mobile {
     display: inline-flex;
     margin-top: 2.5rem;
+  }
+
+  .project__keywords--desktop {
+    display: none;
+  }
+
+  .project__keywords--mobile {
+    display: flex;
   }
 }
 
