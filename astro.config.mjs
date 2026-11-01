@@ -1,7 +1,6 @@
 import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react'
 import markdoc from '@astrojs/markdoc'
-import keystatic from '@keystatic/astro'
 import cloudflare from '@astrojs/cloudflare'
 import node from '@astrojs/node'
 
@@ -16,7 +15,7 @@ export default defineConfig({
         platformProxy: { enabled: true },
       })
     : node({ mode: 'standalone' }),
-  integrations: [react(), markdoc(), keystatic()],
+  integrations: [react(), markdoc()],
 
   vite: {
     optimizeDeps: {
@@ -24,7 +23,17 @@ export default defineConfig({
         '@keystatic/core',
         '@keystatic/core/ui',
       ],
+      entries: ['keystatic.config.*', '.astro/keystatic-imports.js'],
     },
+    plugins: [{
+      name: 'keystatic',
+      resolveId(id) {
+        if (id === 'virtual:keystatic-config') {
+          return this.resolve('./keystatic.config', './a')
+        }
+        return null
+      }
+    }],
   },
 
   // Keystatic lukee nämä getSecret()-funktiolla astro:env/server-moduulista.
