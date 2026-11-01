@@ -14,7 +14,7 @@
   --color-light:       #FFF5E9;   /* sivun tausta */
   --color-extra-light: #FFFEF9;   /* korttien tausta */
   --color-dark:        #0C2D24;   /* tekstit */
-  --color-accent-1:    #076AB0;   /* painikkeet, linkit */
+  --color-accent-1:    #973906;   /* painikkeet, linkit */
 
   /* Vanhat nimet → uudet muuttujat (yhteensopivuus) */
   --color-bg:        var(--color-light);
