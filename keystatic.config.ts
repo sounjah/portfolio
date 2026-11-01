@@ -1,13 +1,19 @@
 import { config, fields, collection, singleton } from '@keystatic/core'
 
+const isProd = import.meta.env.PROD
+
 export default config({
-  storage: {
-    kind: 'github',
-    repo: {
-      owner: 'sounjah',
-      name: 'portfolio',
-    },
-  },
+  storage: isProd
+    ? {
+        kind: 'github',
+        repo: {
+          owner: 'sounjah',
+          name: 'portfolio',
+        },
+      }
+    : {
+        kind: 'local',
+      },
 
   ui: {
     brand: {
