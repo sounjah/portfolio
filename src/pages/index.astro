@@ -62,52 +62,42 @@ const heroSrc = heroImage ?? '/images/heroImage.jpeg'
           const tagDark = projekti.data.tag !== 'Jatkuva kehitys'
           const cardOnly = projekti.data.cardOnly ?? false
 
-          return (
-            <article class="card">
-              {cardOnly ? (
+          const CardTag = (
+            <span class:list={['card__tag', { 'card__tag--dark': tagDark }]}>
+              {projekti.data.tag}
+            </span>
+          )
+
+          if (cardOnly) {
+            return (
+              <article class="card">
                 <div class="card__img-wrap">
-                  <img
-                    src={coverSrc}
-                    alt={projekti.data.title}
-                    class="card__img"
-                  />
-                  <span class:list={['card__tag', { 'card__tag--dark': tagDark }]}>
-                    {projekti.data.tag}
-                  </span>
+                  <img src={coverSrc} alt={projekti.data.title} class="card__img" />
+                  {CardTag}
                 </div>
-              ) : (
-                <a href={`/tyot/${projekti.id}`} class="card__link" tabindex="-1" aria-hidden="true">
-                  <div class="card__img-wrap">
-                    <img
-                      src={coverSrc}
-                      alt={projekti.data.title}
-                      class="card__img"
-                    />
-                    <span class:list={['card__tag', { 'card__tag--dark': tagDark }]}>
-                      {projekti.data.tag}
-                    </span>
-                  </div>
-                </a>
-              )}
-              <div class="card__body">
-                <h3 class="card__title">
-                  {cardOnly ? (
-                    projekti.data.title
-                  ) : (
-                    <a href={`/tyot/${projekti.id}`} class="card__title-link">
-                      {projekti.data.title}
-                    </a>
-                  )}
-                </h3>
-                <p class="card__desc">{projekti.data.ingress}</p>
-                {!cardOnly && (
-                  <a href={`/tyot/${projekti.id}`} class="btn btn--primary">
-                    <span class="btn__text">Lue lisää</span>
-                    <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
-                  </a>
-                )}
+                <div class="card__body">
+                  <h3 class="card__title">{projekti.data.title}</h3>
+                  <p class="card__desc">{projekti.data.ingress}</p>
+                </div>
+              </article>
+            )
+          }
+
+          return (
+            <a href={`/tyot/${projekti.id}`} class="card">
+              <div class="card__img-wrap">
+                <img src={coverSrc} alt={projekti.data.title} class="card__img" />
+                {CardTag}
               </div>
-            </article>
+              <div class="card__body">
+                <h3 class="card__title">{projekti.data.title}</h3>
+                <p class="card__desc">{projekti.data.ingress}</p>
+                <span class="btn btn--primary">
+                  <span class="btn__text">Lue lisää</span>
+                  <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
+                </span>
+              </div>
+            </a>
           )
         })}
       </div>

@@ -203,7 +203,8 @@ a {
 .works__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
 /* ── CARD ────────────────────────────────────────────────── */
@@ -211,14 +212,19 @@ a {
   display: flex;
   flex-direction: column;
   height: 100%;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 /* Image area */
 .card__img-wrap {
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: var(--radius) var(--radius) 0 0;
   aspect-ratio: 4 / 3;
+  flex-shrink: 0;
 }
 
 .card__img {
@@ -305,7 +311,7 @@ a {
   border: none;
   background: none;
   text-decoration: none;
-  align-self: flex-start;
+  align-self: flex-end;
   margin-top: auto;
 }
 
