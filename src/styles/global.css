@@ -157,7 +157,7 @@ a {
   line-height: 1;
   margin-top: 0.5rem;
   transition: transform 0.25s;
-  align-self: flex-start;
+  align-self: center;
 }
 
 .hero__arrow:hover {
