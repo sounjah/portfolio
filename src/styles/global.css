@@ -655,6 +655,11 @@ a {
 
   .project__keywords--mobile {
     display: flex;
+    margin-bottom: 2rem;
+  }
+
+  .project__year {
+    margin-bottom: 2rem;
   }
 }
 
