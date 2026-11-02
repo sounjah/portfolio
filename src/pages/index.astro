@@ -32,6 +32,7 @@ const heroImage: string = parseFm('heroImage')
 const heroImageAlt: string = parseFm('heroImageAlt') || 'Sonja Kujansuu'
 const introHeading: string = parseFm('introHeading') || 'Welcome to my portfolio!'
 const introSubheading: string = parseFm('introSubheading') || ''
+const cardButtonLabel: string = parseFm('cardButtonLabel') || 'Read the full case'
 const metaTitle: string = parseFm('metaTitle') || 'Sonja Kujansuu – Portfolio'
 const metaDescription: string = parseFm('metaDescription') || ''
 
@@ -109,7 +110,7 @@ const heroSrc = heroImage || '/images/heroImage.jpg'
                 {projekti.data.year && <p class="card__year">{projekti.data.year}</p>}
                 <p class="card__desc">{projekti.data.ingress}</p>
                 <span class="btn btn--primary">
-                  <span class="btn__text">Want to know more?</span>
+                  <span class="btn__text">{cardButtonLabel}</span>
                   <img src="/images/arrow.svg" class="btn__arrow" alt="" aria-hidden="true" width="27" height="15" />
                 </span>
               </div>

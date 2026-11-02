@@ -58,6 +58,11 @@ export default config({
           label: 'Intro-teksti',
           description: 'Esittelyteksti etusivulle. Voit käyttää muotoiluja.',
         }),
+        cardButtonLabel: fields.text({
+          label: 'Nostokortin painikkeen teksti',
+          description: 'Teksti projektikortin "Lue lisää" -painikkeessa',
+          defaultValue: 'Read the full case',
+        }),
         contactHeading: fields.text({
           label: 'Contact-otsikko',
           defaultValue: 'Contact',
