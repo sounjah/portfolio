@@ -129,7 +129,7 @@ a {
 
 .hero__heading {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 2.5rem;
   font-weight: 500;
   line-height: 1.15;
   color: var(--color-dark);
@@ -199,6 +199,15 @@ a {
   max-width: calc(var(--max-width) + var(--gutter) * 2);
   margin-inline: auto;
   padding: 0 var(--gutter) clamp(3rem, 6vw, 5rem);
+}
+
+.works__heading {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .works__grid {
@@ -419,6 +428,11 @@ a {
   padding: 0 var(--gutter);
 }
 
+.project-contact-wrap {
+  padding: 0 var(--gutter);
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
 .contact {
   max-width: var(--max-width);
   margin-inline: auto;
@@ -562,7 +576,7 @@ a {
   font-size: clamp(1.75rem, 3.5vw, 2.75rem);
   font-weight: 700;
   line-height: 1.15;
-  color: var(--color-accent);
+  color: var(--color-dark);
   margin-bottom: 0.6rem;
 }
 
@@ -675,8 +689,14 @@ a {
 }
 
 @media (max-width: 540px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
   .site-nav {
-    gap: 1rem;
+    gap: 2.5rem;
     font-size: 0.875rem;
   }
 
@@ -687,6 +707,15 @@ a {
   .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .card .btn,
+  .project__btn--mobile,
+  .project__btn--desktop,
+  .contact .btn,
+  .project-contact-wrap .btn {
+    width: auto;
+    justify-content: flex-start;
   }
 
   .contact {
