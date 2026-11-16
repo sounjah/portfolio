@@ -29,7 +29,7 @@ export default config({
   singletons: {
     etusivu: singleton({
       label: 'Etusivu',
-      path: 'src/content/etusivu',
+      path: 'src/content/etusivu.mdoc',
       format: { contentField: 'introBody' },
       schema: {
         heroImage: fields.image({
